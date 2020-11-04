@@ -2,8 +2,7 @@ import subprocess
 from locust import HttpUser, task, between
 from Loado.app import config_reader
 
-#configuration = config_reader()
-configuration = None
+configuration = config_reader()
 
 class GetLocust(HttpUser):
 
