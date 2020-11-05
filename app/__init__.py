@@ -12,5 +12,3 @@ def change_config_file(key, value):
     file_content.set("Load Testing", key, value)
     with open("configuration.ini", "w") as config_file:
         file_content.write(config_file)
-
-change_config_file("PORT", "65")

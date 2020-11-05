@@ -8,9 +8,9 @@ class GetLocust(HttpUser):
 
     def __init__(self, host = "localhost", port = "80", route = "/"):
         if configuration:
-            self.host = configuration["Load Testing"]["HOST"]
-            self.port = configuration["Load Testing"]["PORT"]
-            self.route = configuration["Load Testing"]["ROUTE"]
+            self.host = configuration["Load Testing"]["host"]
+            self.port = configuration["Load Testing"]["port"]
+            self.route = configuration["Load Testing"]["route"]
         else:
             self.host = host
             self.port = port
