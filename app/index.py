@@ -1,6 +1,7 @@
 import argparse
 import sys
 from Loado.app import change_config_file
+from Loado.app.core import flow
 
 class Parser:
     def run_arguments(self):
@@ -26,7 +27,9 @@ def runner():
             change_config_file(arg[5:], eval(arg)) # Change the configuration file value
             print(f"{arg[5:]} is set to {eval(arg)}")
     if args.type:
-        print(f"Type is {args.type}")
+        print(f"Requests type is {args.type}")
+        flow.run_locust_page_get()
+
     elif args.quiet:
         print("quiet")
 
