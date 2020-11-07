@@ -4,7 +4,7 @@ from Loado.app import config_reader
 
 configuration = config_reader()
 
-class GetLocust(HttpUser):
+class Config:
 
     def __init__(self, host = "localhost", port = "80", route = "/"):
         if configuration:
@@ -16,6 +16,13 @@ class GetLocust(HttpUser):
             self.port = port
             self.route = route
 
+
+conf_values = Config()
+
+class GetLocust(HttpUser):
+
+    wait_time = between(5, 15)
+
     @task
     def get(self):
-        self.client.get(self.route)
+        self.client.get(conf_values.route)
