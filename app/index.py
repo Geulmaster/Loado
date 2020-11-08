@@ -26,13 +26,14 @@ def runner():
         if eval(arg):
             change_config_file(arg[5:], eval(arg)) # Change the configuration file value
             print(f"{arg[5:]} is set to {eval(arg)}")
-    if args.type:
-        print(f"Requests type is {args.type}")
-        flow.run_locust_page_get()
-
-    elif args.quiet:
-        print("quiet")
-
+    if args.run == "run":
+        if args.type:
+            try:
+                print(f"Requests type is {args.type}")
+                method = getattr(flow, args.type)
+                method()
+            except AttributeError:
+                print(f"{args.type} requests are not supported")
 
 if __name__ == '__main__':
     parser = Parser()
