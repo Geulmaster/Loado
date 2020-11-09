@@ -34,6 +34,7 @@ def runner():
                 method()
             except AttributeError:
                 print(f"{args.type} requests are not supported")
+    sys.exit()
 
 if __name__ == '__main__':
     parser = Parser()
