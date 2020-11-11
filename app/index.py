@@ -15,7 +15,7 @@ class Parser:
         parser.add_argument("-r", "--route", help="Set target's route")
         parser.add_argument("-t", "--time", help="Set run duration")
         parser.add_argument("-u", "--users", help="Set users amount to simulate")
-        parser.add_argument("-sp", "--spwan", help="Set spaen rate")
+        parser.add_argument("-sp", "--spawn_rate", help="Set spaen rate")
         parser.add_argument("run", nargs='?', help='Run command')
         parser.add_argument("type", nargs='?', help="The load tests web request type")
         args = parser.parse_args()
@@ -24,7 +24,7 @@ class Parser:
 def runner():
     if len(sys.argv) < 2:
         print(parser.print_help())
-    args_list = ["args.host", "args.port", "args.route"]
+    args_list = ["args.host", "args.port", "args.route", "args.time", "args.users", "args.spawn_rate"]
     for arg in args_list:
         if eval(arg):
             change_config_file(arg[5:], eval(arg)) # Change the configuration file value
@@ -37,7 +37,6 @@ def runner():
                 method()
             except AttributeError:
                 print(f"{args.type} requests are not supported")
-    sys.exit()
 
 if __name__ == '__main__':
     parser = Parser()
