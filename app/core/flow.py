@@ -30,6 +30,16 @@ def beautify_results():
 
 results = beautify_results()
 
+def get_results():
+    columns_list = []
+    columns = driver.find_elements_by_class_name("stats_label")
+    for column in columns:
+        columns_list.append(column.text)
+    formatted_columns = [x for x in columns_list if x]
+    table = DataFrame([results[0]],columns=formatted_columns)
+    print(table)
+    return table
+
 def general_flow(type):
     global driver
     driver = webdriver.Chrome(options=options)
@@ -50,16 +60,6 @@ def general_flow(type):
         print("One or more of the credentials is incorrect")
     driver.close()
     run.kill()
-
-def get_results():
-    columns_list = []
-    columns = driver.find_elements_by_class_name("stats_label")
-    for column in columns:
-        columns_list.append(column.text)
-    formatted_columns = [x for x in columns_list if x]
-    table = DataFrame([results[0], results[1]],columns=formatted_columns)
-    print(table)
-    return table
 
 def get():
     general_flow("get")
