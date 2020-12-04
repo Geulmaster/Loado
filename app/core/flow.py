@@ -1,7 +1,7 @@
 import subprocess
 from pandas import DataFrame
 from time import sleep
-from json import dumps, loads
+from json import loads
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -51,10 +51,22 @@ def get_results():
     return table
 
 def convert_results_to_json():
+    """
+    Gets an unformatted dict and formats it in order to push to DB
+    """
     result = get_results().to_json(orient="split")
     parsed_result = loads(result)
-    results_json_file = dumps(parsed_result, indent=4)
-    print(results_json_file)
+    columns = parsed_result["columns"]
+    data = parsed_result["data"]
+    formatted_data = []
+    for sublist in data:
+        for item in sublist:
+            formatted_data.append(item)
+    new_results_dict = {}
+    for i, val in enumerate(columns):
+        new_results_dict[val] = formatted_data[i]
+    print(new_results_dict)
+    return new_results_dict
     
 def general_flow(type):
     """
@@ -74,7 +86,6 @@ def general_flow(type):
         driver.find_element_by_class_name(sl.stop_btn_class).click()
         results = driver.find_element_by_id(sl.results_id).text
         export_results(results)
-        get_results()
         convert_results_to_json()
     except:
         print("One or more of the credentials is incorrect")
