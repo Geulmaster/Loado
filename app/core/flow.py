@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from Loado.app.load_tests.get import Config
 from Loado.app.core.selectors import locust_selectors as sl
 from Loado.app.core import export_results, beautify_results
+from Loado.app.core.data_wizard import Mongo
 
 configuration = Config()
 options = webdriver.ChromeOptions()
@@ -32,6 +33,7 @@ def convert_results_to_json():
     """
     Gets an unformatted dict and formats it in order to push to DB
     """
+    global new_results_dict
     result = get_results().to_json(orient="split")
     parsed_result = loads(result)
     columns = parsed_result["columns"]
@@ -45,6 +47,17 @@ def convert_results_to_json():
         new_results_dict[val] = formatted_data[i]
     print(new_results_dict)
     return new_results_dict
+
+def insert_results_to_db():
+    """
+    Inserts results to DB - uses user's input for permission
+    """
+    db = Mongo()
+    push = input("Would you like to save results in DB? ")
+    if push.lower() == "y":
+        db.insert_to_mongodb(doc=new_results_dict)
+    else:
+        print("OK!")
     
 def general_flow(type):
     """
@@ -67,8 +80,10 @@ def general_flow(type):
         convert_results_to_json()
     except:
         print("One or more of the credentials is incorrect")
-    driver.close()
-    run.kill()
+    finally:
+        driver.close()
+        insert_results_to_db()
+        run.kill()
 
 def get():
     general_flow("get")
