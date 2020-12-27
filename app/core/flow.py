@@ -2,6 +2,7 @@ import subprocess
 from pandas import DataFrame
 from time import sleep
 from json import loads
+from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -45,6 +46,7 @@ def convert_results_to_json():
     new_results_dict = {}
     for i, val in enumerate(columns):
         new_results_dict[val] = formatted_data[i]
+    new_results_dict["_id"] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     print(new_results_dict)
     return new_results_dict
 
