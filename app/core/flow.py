@@ -15,8 +15,6 @@ from Loado.app.core.data_wizard import Mongo
 configuration = Config()
 options = webdriver.ChromeOptions()
 
-results = beautify_results()
-
 def get_results():
     """
     Return results table from locust's UI
@@ -26,7 +24,7 @@ def get_results():
     for column in columns:
         columns_list.append(column.text)
     formatted_columns = [x for x in columns_list if x]
-    table = DataFrame([results[0]],columns=formatted_columns)
+    table = DataFrame([beautify_results()[0]],columns=formatted_columns)
     print(table)
     return table
 

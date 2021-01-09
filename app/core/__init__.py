@@ -1,9 +1,12 @@
+import os
+
+work_dir = os.getcwd()
 
 def export_results(result):
     """
     Empty results file and write new results to it
     """
-    res_file = open("results.txt", "w")
+    res_file = open(work_dir + "\\results.txt", "w")
     res_file.close()
     with open("results.txt", "w") as results_file:
         results_file.write(result)
@@ -12,7 +15,7 @@ def beautify_results():
     """
     Generates list of list for pandas.DataFrame
     """
-    with open("results.txt", "r") as results_file:
+    with open(work_dir + "\\results.txt", "r") as results_file:
         file_content = results_file.readlines()
     del file_content[0]
     values_list_of_list = []
