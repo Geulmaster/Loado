@@ -21,6 +21,7 @@ class Parser:
         args = parser.parse_args()
         return args
 
+
 def runner():
     if len(sys.argv) < 2:
         print(parser.print_help())
@@ -42,3 +43,4 @@ if __name__ == '__main__':
     parser = Parser()
     parser.run_arguments()
     runner()
+    

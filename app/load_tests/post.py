@@ -18,3 +18,4 @@ class PostLocust(HttpUser):
     @task
     def post(self):
         self.client.post(conf_values.route, json=conf_dict)
+        

@@ -11,3 +11,4 @@ class GetLocust(HttpUser):
     @task
     def get(self):
         self.client.get(conf_values.route)
+        

@@ -11,6 +11,7 @@ def export_results(result):
     with open("results.txt", "w") as results_file:
         results_file.write(result)
 
+
 def beautify_results():
     """
     Generates list of list for pandas.DataFrame
@@ -24,3 +25,4 @@ def beautify_results():
         line_list = stripped_line.split()
         values_list_of_list.append(line_list)
     return values_list_of_list
+    

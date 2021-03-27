@@ -21,3 +21,4 @@ class Config:
             self.users = users
             self.spawn_rate = spawn_rate
             self.time = time
+            

@@ -28,6 +28,7 @@ def get_results():
     print(table)
     return table
 
+
 def convert_results_to_json():
     """
     Gets an unformatted dict and formats it in order to push to DB
@@ -48,6 +49,7 @@ def convert_results_to_json():
     print(new_results_dict)
     return new_results_dict
 
+
 def insert_results_to_db():
     """
     Inserts results to DB - uses user's input for permission
@@ -59,6 +61,7 @@ def insert_results_to_db():
     else:
         print("OK!")
     
+
 def general_flow(type):
     """
     Runs load tests accordint to type
@@ -85,8 +88,11 @@ def general_flow(type):
         insert_results_to_db()
         run.kill()
 
+
 def get():
     general_flow("get")
 
+
 def post():
     general_flow("post")
+    
