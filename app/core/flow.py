@@ -64,9 +64,9 @@ def general_flow(type):
     Runs load tests accordint to type
     """
     global driver
-    driver = webdriver.Chrome(options=options)
     run = subprocess.Popen(["locust", "-f", f"./load_tests/{type}.py", "--host", f"http://{configuration.host}:{configuration.port}"])
-    driver.get("localhost:8089")
+    driver = webdriver.Chrome(options=options)
+    driver.get("http://localhost:8089")
     driver.maximize_window()
     WebDriverWait(driver, 15).until(EC.visibility_of_element_located((By.ID, sl.total_users_id)))
     try:
@@ -79,7 +79,7 @@ def general_flow(type):
         export_results(results)
         convert_results_to_json()
     except:
-        print("One or more of the credentials is incorrect")
+        print("One or more of the credentials are incorrect")
     finally:
         driver.close()
         insert_results_to_db()
