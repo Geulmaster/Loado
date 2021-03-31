@@ -20,5 +20,5 @@ class TestSanity:
 
 """
 Run example:
-pytest -q sanity.py --arg=hn --name=https://google.com
+pytest -q sanity.py --arg hn --name https://google.com
 """
