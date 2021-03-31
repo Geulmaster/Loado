@@ -4,6 +4,7 @@ from time import sleep
 from json import loads
 from datetime import datetime
 from selenium import webdriver
+import chromedriver_autoinstaller
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -13,6 +14,7 @@ from Loado.app.core import export_results, beautify_results
 from Loado.app.core.data_wizard import Mongo
 
 configuration = Config()
+chromedriver_autoinstaller.install() 
 options = webdriver.ChromeOptions()
 
 def get_results():

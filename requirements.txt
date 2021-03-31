@@ -1,3 +1,4 @@
 locust
 pymongo
 selenium
+chromedriver-autoinstaller
